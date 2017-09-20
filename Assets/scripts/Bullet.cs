@@ -11,11 +11,8 @@ public class Bullet : MonoBehaviour {
 
 
     public float range;
-<<<<<<< HEAD
+
     public float speed = 60f;
-=======
-    public float speed = 80f;
->>>>>>> a7ed14b90da53a0f8e5163109dc29f5395ddf039
 
     private float dd;
 
@@ -120,8 +117,5 @@ public class Bullet : MonoBehaviour {
         }
     }
     
-	private void ttt(){}
-
-
 
 }
