@@ -12,6 +12,8 @@ public class Bullet : MonoBehaviour {
 
     public float range;
     public float speed = 60f;
+=======
+    public float speed = 80f;
 
     private float dd;
 
