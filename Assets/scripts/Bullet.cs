@@ -6,12 +6,12 @@ public class Bullet : MonoBehaviour {
 
 
     public Vector3 endPoint;
-    public LayerMask layerMask;
+    public LayerMask ignoreCollision;
     public Vector3? oldPos;
 
 
     public float range;
-    public float speed = 70f;
+    public float speed = 60f;
 
     private float dd;
 
@@ -45,10 +45,13 @@ public class Bullet : MonoBehaviour {
                 //Debug.Log("3 start et eller andet");
                 RaycastHit hit;
 
-                if (Physics.Linecast(oldPos.Value, transform.position, out hit, ~layerMask.value))
+                if (Physics.Linecast(oldPos.Value, transform.position, out hit, ~ignoreCollision.value))
                 {
+                    Debug.Log("Hit on Linecast: "+hit.collider.name);
                     gameObject.SetActive(false);
-                    HitTarget(hit.collider.gameObject);
+                    
+                    hit.collider.SendMessage("OnGameObjectEnter", gameObject, SendMessageOptions.DontRequireReceiver);
+                    //HitTarget(hit.collider.gameObject);
                 }
                 else
                 {
@@ -66,12 +69,12 @@ public class Bullet : MonoBehaviour {
             //transform.Translate(endPoint.normalized * distanceThisFrame, Space.World);
             //transform.position = Vector3.MoveTowards(transform.position, endPoint, distanceThisFrame);
             var heading = endPoint - startPos;
-            Debug.Log("a " + heading);
-            Debug.Log("b " + heading.normalized);
+            //Debug.Log("a " + heading);
+            //Debug.Log("b " + heading.normalized);
             transform.Translate(heading.normalized * distanceThisFrame, Space.World);
             if (Vector3.Distance(startPos, transform.position) > range)
             {
-                //Debug.Log("2 start et eller andet");
+                Debug.Log("Distance");
 
                 gameObject.SetActive(false);
 
@@ -82,8 +85,12 @@ public class Bullet : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        gameObject.SetActive(false);
-        HitTarget(collision.gameObject);
+        if ((ignoreCollision.value & (1 << collision.gameObject.layer)) != (1 << collision.gameObject.layer))
+        {
+            Debug.Log("Hit collision: "+collision.gameObject.name);
+            gameObject.SetActive(false);
+        }
+        //HitTarget(collision.gameObject);
     }
 
     void OnEnable()

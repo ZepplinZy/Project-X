@@ -2262,9 +2262,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPoint: {x: 0, y: 0, z: 0}
-  layerMask:
+  ignoreCollision:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   range: 0
   speed: 70
 --- !u!114 &114514499878067650
@@ -2413,6 +2413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHP: 0
   HP: 500
+  Hitboxs: []
 --- !u!120 &120081821890502770
 LineRenderer:
   m_ObjectHideFlags: 1
