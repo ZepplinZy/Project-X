@@ -118,6 +118,7 @@ public class Bullet : MonoBehaviour {
         }
     }
     
+	private void ttt(){}
 
 
 
