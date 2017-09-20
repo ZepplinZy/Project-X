@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour {
 
 
     public float range;
+<<<<<<< HEAD
     public float speed = 60f;
 =======
     public float speed = 80f;
