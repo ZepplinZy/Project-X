@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour {
 
 
     public Vector3 endPoint;
+    public LayerMask ignoreCollision;
     public Vector3? oldPos;
 
 
@@ -14,6 +15,7 @@ public class Bullet : MonoBehaviour {
     public float speed = 20f;
 =======
 
+    public float speed = 60f;
 >>>>>>> b5c53beb0c4c3981b706799f8b16ab42fbb020f9
 
     private float dd;
@@ -48,8 +50,13 @@ public class Bullet : MonoBehaviour {
                 //Debug.Log("3 start et eller andet");
                 RaycastHit hit;
 
+                if (Physics.Linecast(oldPos.Value, transform.position, out hit, ~ignoreCollision.value))
                 {
+                    Debug.Log("Hit on Linecast: "+hit.collider.name);
                     gameObject.SetActive(false);
+                    
+                    hit.collider.SendMessage("OnGameObjectEnter", gameObject, SendMessageOptions.DontRequireReceiver);
+                    //HitTarget(hit.collider.gameObject);
                 }
                 else
                 {
@@ -67,9 +74,12 @@ public class Bullet : MonoBehaviour {
             //transform.Translate(endPoint.normalized * distanceThisFrame, Space.World);
             //transform.position = Vector3.MoveTowards(transform.position, endPoint, distanceThisFrame);
             var heading = endPoint - startPos;
+            //Debug.Log("a " + heading);
+            //Debug.Log("b " + heading.normalized);
             transform.Translate(heading.normalized * distanceThisFrame, Space.World);
             if (Vector3.Distance(startPos, transform.position) > range)
             {
+                Debug.Log("Distance");
 
                 gameObject.SetActive(false);
 
@@ -80,6 +90,12 @@ public class Bullet : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
+        if ((ignoreCollision.value & (1 << collision.gameObject.layer)) != (1 << collision.gameObject.layer))
+        {
+            Debug.Log("Hit collision: "+collision.gameObject.name);
+            gameObject.SetActive(false);
+        }
+        //HitTarget(collision.gameObject);
     }
 
     void OnEnable()
@@ -105,8 +121,5 @@ public class Bullet : MonoBehaviour {
         }
     }
     
-	private void ttt(){}
-
-
 
 }
