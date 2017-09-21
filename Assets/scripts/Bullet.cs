@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour {
     public Vector3? oldPos;
 
     public float range;
+    public float speed = 20f;
 
     public float speed = 100f;
 
