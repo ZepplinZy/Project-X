@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour {
     public float speed = 100f;
 
     private float dd;
+    public float speed = 70f;
 
     private Vector3 startPos;
 
