@@ -19,12 +19,14 @@ public class HealthBar : MonoBehaviour {
 	void Start ()
     {
         hp = GetComponent<Health>();
-        boxCollider = GetComponent<BoxCollider>();
+        //boxCollider = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
     void Update ()
     {
+
+        return;
         slider.transform.LookAt(Camera.main.transform);
         //if (InCombat)
         //{
@@ -40,7 +42,7 @@ public class HealthBar : MonoBehaviour {
     private void HealthLeft()
     {
         pos = gameObject.transform.position;
-        pos.y += (boxCollider.size.y * gameObject.transform.localScale.y) + (slider.GetComponent<RectTransform>().sizeDelta.y * 2 / 100);
+        //pos.y += (boxCollider.size.y * gameObject.transform.localScale.y) + (slider.GetComponent<RectTransform>().sizeDelta.y * 2 / 100);
         Debug.Log("bogstav " + slider.GetComponent<RectTransform>().sizeDelta.y);
         //Debug.Log("1 " + pos);
         //Debug.Log("2 " + slider.transform.position);

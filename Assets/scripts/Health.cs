@@ -3,14 +3,22 @@
 public class Health : MonoBehaviour
 {
 
+
+
     public int currentHP;
     public int HP = 500;
-
+    public GameObject[] Hitboxs;
     public bool IsAlive { get { return currentHP > 0; } }
+    
 
     void Start()
     {
         currentHP = HP;
+
+        for (int i = 0; i < Hitboxs.Length; i++)
+        {
+            Hitboxs[i].GetComponent<Hitbox>().OnTakeDamge  = TakeDamage;
+        }
     }
 
     void Update()
@@ -23,13 +31,12 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int dmg)
     {
-        //Debug.Log("cp" + currentHP);
         currentHP += dmg < currentHP ? -dmg : -currentHP;
-        Debug.Log(gameObject.name);
+        Debug.Log("HP" + currentHP);
+        //Debug.Log(gameObject.name);
         //Debug.Log("cpcp" + currentHP);
 
     }
-
     
 
 

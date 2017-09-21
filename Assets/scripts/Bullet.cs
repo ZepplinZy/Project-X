@@ -6,12 +6,15 @@ public class Bullet : MonoBehaviour {
 
 
     public Vector3 endPoint;
-    public LayerMask layerMask;
     public Vector3? oldPos;
 
 
     public float range;
+<<<<<<< HEAD
     public float speed = 20f;
+=======
+
+>>>>>>> b5c53beb0c4c3981b706799f8b16ab42fbb020f9
 
     private float dd;
 
@@ -45,10 +48,8 @@ public class Bullet : MonoBehaviour {
                 //Debug.Log("3 start et eller andet");
                 RaycastHit hit;
 
-                if (Physics.Linecast(oldPos.Value, transform.position, out hit, ~layerMask.value))
                 {
                     gameObject.SetActive(false);
-                    HitTarget(hit.collider.gameObject);
                 }
                 else
                 {
@@ -66,12 +67,9 @@ public class Bullet : MonoBehaviour {
             //transform.Translate(endPoint.normalized * distanceThisFrame, Space.World);
             //transform.position = Vector3.MoveTowards(transform.position, endPoint, distanceThisFrame);
             var heading = endPoint - startPos;
-            Debug.Log("a " + heading);
-            Debug.Log("b " + heading.normalized);
             transform.Translate(heading.normalized * distanceThisFrame, Space.World);
             if (Vector3.Distance(startPos, transform.position) > range)
             {
-                //Debug.Log("2 start et eller andet");
 
                 gameObject.SetActive(false);
 
@@ -82,8 +80,6 @@ public class Bullet : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        gameObject.SetActive(false);
-        HitTarget(collision.gameObject);
     }
 
     void OnEnable()

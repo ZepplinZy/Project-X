@@ -55,6 +55,7 @@
      <Compile Include="Assets\scripts\Enemies.cs" />
      <Compile Include="Assets\scripts\Health.cs" />
      <Compile Include="Assets\scripts\HealthBar.cs" />
+     <Compile Include="Assets\scripts\Hitbox.cs" />
      <Compile Include="Assets\scripts\Move.cs" />
      <Compile Include="Assets\scripts\MovementAI.cs" />
      <Compile Include="Assets\scripts\TextScript.cs" />
