@@ -9,10 +9,9 @@ public class Bullet : MonoBehaviour {
     public LayerMask ignoreCollision;
     public Vector3? oldPos;
 
-
     public float range;
 
-    public float speed = 60f;
+    public float speed = 100f;
 
     private float dd;
 
@@ -115,6 +114,12 @@ public class Bullet : MonoBehaviour {
             //Debug.Log("takedamg");
             //Debug.Log(hitHealth.currentHP);
         }
+    }
+
+
+    public void TT()
+    {
+
     }
     
 
