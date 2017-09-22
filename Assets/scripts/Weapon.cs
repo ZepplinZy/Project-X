@@ -15,7 +15,6 @@ public class Weapon : MonoBehaviour
     public int ammo = 1000;
     public float reloadSpeed;
     public float fireRate = 0.25f;
-    public float dmg = 50;
 
     private bool HasShots { get { return currentShots > 0; }}
     private bool CanReload { get { return currentShots != shots && currentAmmo > 0; }}
@@ -89,12 +88,13 @@ public class Weapon : MonoBehaviour
 
 
         var bullet = GetBullet();
-        bullet.transform.position = gunEnd.position;
+        bullet.transform.position =gunEnd.position; //rayOrigin;//
         bullet.transform.rotation = eyes.transform.rotation;
 
         RaycastHit hit;
-
-        if (Physics.Raycast(rayOrigin, eyes.transform.forward, out hit, weaponRange))
+        Vector3 newSpot = rayOrigin + (dir.normalized * weaponRange);
+        if (Physics.Raycast(rayOrigin, eyes.transform.forward, out hit, weaponRange, ~(1 << LayerMask.NameToLayer("Trigger"))))
+        //if (Physics.Linecast(rayOrigin, dir, out hit, ~1 << LayerMask.NameToLayer("Trigger")))
         {
             laserLine.SetPosition(1, hit.point);
             bullet.GetComponent<Bullet>().endPoint = hit.point;

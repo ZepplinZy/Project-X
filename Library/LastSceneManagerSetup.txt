@@ -1,4 +1,4 @@
 sceneSetups:
-- path: "Assets/Scene/working scene 1\xBD.unity"
+- path: Assets/Scene/21-09-2017 scene.unity
   isLoaded: 1
   isActive: 1

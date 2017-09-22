@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\scripts\Bullet.cs" />
+     <Compile Include="Assets\scripts\ChildTriggerCollider.cs" />
      <Compile Include="Assets\scripts\Enemies.cs" />
      <Compile Include="Assets\scripts\Health.cs" />
      <Compile Include="Assets\scripts\HealthBar.cs" />

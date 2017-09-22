@@ -17,24 +17,33 @@ public class Hitbox : MonoBehaviour {
     void Start () { CanGiveDamge = 1 << LayerMask.NameToLayer("Bullet") | 1 << LayerMask.NameToLayer("Main Player");  }
 	
 	// Update is called once per frame
-	void Update () {
-
-        Debug.Log("Layer: " +  CanGiveDamge.value);
+	void Update ()
+    {
+        //Debug.Log("Layer: " +  CanGiveDamge.value);
     }
 
     void OnGameObjectEnter(GameObject gb)
     {
-        Debug.Log("Hit: " + gb.layer);
+        //Debug.Log("Hit: " + gb.layer);
         //
-        
-        if((CanGiveDamge.value & (1 << gb.layer)) == (1 << gb.layer))
-            OnTakeDamge(100);
+
+        if ((CanGiveDamge.value & (1 << gb.layer)) == (1 << gb.layer))
+        {
+            Debug.Log("Hit: " + gb.activeSelf);
+            var bullet = gb.GetComponent<Bullet>();
+            if (!bullet.hasHitTarget || true)
+            {
+                bullet.hasHitTarget = true;
+                OnTakeDamge(Mathf.RoundToInt(bullet.dmg * percent));
+            }
+        }
+
     }
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("HitC: " + collision.collider.name);
+        //Debug.Log("HitC: " + collision.collider.name);
 
-        OnGameObjectEnter(collision.collider.gameObject);
+        //OnGameObjectEnter(collision.collider.gameObject);
     }
     
 }

@@ -32,7 +32,7 @@ public class Health : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         currentHP += dmg < currentHP ? -dmg : -currentHP;
-        Debug.Log("HP" + currentHP);
+        Debug.Log("dmg " + dmg);
         //Debug.Log(gameObject.name);
         //Debug.Log("cpcp" + currentHP);
 

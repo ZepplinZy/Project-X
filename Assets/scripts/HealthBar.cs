@@ -8,8 +8,8 @@ public class HealthBar : MonoBehaviour {
 
     //public GameObject healthBar;
     public Slider slider;
-
     Vector3 pos = Vector3.zero;
+    public float height;
 
     BoxCollider boxCollider;
 
@@ -19,14 +19,14 @@ public class HealthBar : MonoBehaviour {
 	void Start ()
     {
         hp = GetComponent<Health>();
+        slider.maxValue = hp.HP;
         //boxCollider = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
     void Update ()
     {
-
-        return;
+        
         slider.transform.LookAt(Camera.main.transform);
         //if (InCombat)
         //{
@@ -43,9 +43,12 @@ public class HealthBar : MonoBehaviour {
     {
         pos = gameObject.transform.position;
         //pos.y += (boxCollider.size.y * gameObject.transform.localScale.y) + (slider.GetComponent<RectTransform>().sizeDelta.y * 2 / 100);
-        Debug.Log("bogstav " + slider.GetComponent<RectTransform>().sizeDelta.y);
+        //Debug.Log("bogstav " + slider.GetComponent<RectTransform>().sizeDelta.y);
         //Debug.Log("1 " + pos);
         //Debug.Log("2 " + slider.transform.position);
+
+        pos.y = height;
+
         slider.transform.position = pos;
 
         slider.value = hp.currentHP;

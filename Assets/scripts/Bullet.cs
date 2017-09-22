@@ -9,13 +9,13 @@ public class Bullet : MonoBehaviour {
     public LayerMask ignoreCollision;
     public Vector3? oldPos;
 
+    public bool hasHitTarget;
+
     public float range;
-    public float speed = 20f;
 
-    public float speed = 100f;
-
-    private float dd;
     public float speed = 70f;
+
+    public float dmg = 50;
 
     private Vector3 startPos;
 
@@ -87,9 +87,10 @@ public class Bullet : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        if ((ignoreCollision.value & (1 << collision.gameObject.layer)) != (1 << collision.gameObject.layer))
+        if ((ignoreCollision.value & (1 << collision.gameObject.layer)) != (1 << collision.gameObject.layer) && gameObject.activeSelf)
         {
-            Debug.Log("Hit collision: "+collision.gameObject.name);
+            Debug.Log("Hit collision: ");
+            collision.gameObject.SendMessage("OnGameObjectEnter", gameObject, SendMessageOptions.DontRequireReceiver);
             gameObject.SetActive(false);
         }
         //HitTarget(collision.gameObject);
@@ -99,10 +100,10 @@ public class Bullet : MonoBehaviour {
     {
         startPos = transform.position;
         oldPos = transform.position;
+        hasHitTarget = false;
         //Debug.DrawLine(transform.position, endPoint, Color.blue, 10f);
-        dd = Vector3.Distance(startPos, endPoint);
 
-        
+
     }
 
     private void HitTarget(GameObject go)
@@ -117,12 +118,7 @@ public class Bullet : MonoBehaviour {
             //Debug.Log(hitHealth.currentHP);
         }
     }
-
-
-    public void TT()
-    {
-
-    }
+    
     
 
 }
